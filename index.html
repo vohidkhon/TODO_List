@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Todo List</title>
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app" class="container mx-auto px-4">
+        <header class="bg-gradient-to-r from-purple-500 to-pink-500 h-70">
+            <div class="flex justify-around">
+                <a class="text-5xl text-white px-8 py-8" href="">T O D O</a>
+                <a class="text-5xl text-white px-8 py-8" href="">List</a>
+            </div>
+            <div class="p-8 flex justify-center">
+                <ul class="px-8 py-8 rounded-md border w-8/12 bg-white">
+                    <li>
+                        <div class="flex justify-around">
+                            <input class="w-9 h-9 cursor-pointer krug-round appearance-none rounded-full border border-indigo-300" v-on:click="add" type="button">
+                            <input id="color" class="px-5 py-5 border-white text-3xl w-11/12 h-8 caret-white" v-bind:value="ValueNewTask" v-on:input="EnTask" placeholder="Enter the task" type="text" v-on:keypress.enter="add">
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </header>
+        <div class="p-8 justify-center shadow-2xl">
+            <div class="flex justify-center">
+                <ul class="px-8 py-8 rounded-t-lg border w-8/12">
+                    <li v-for="(mask, index) in Tasklist" :key="mask.id">
+                        <div class="flex justify-between">
+                            <div>
+                                <input id="chBox" v-on:click="clCheck(index)" class="w-9 h-9 cursor-pointer krug-round appearance-none rounded-full border border-indigo-300" type="checkbox">
+                                <span id="str" class="text-4xl text-gray-500 ml-2">{{mask.title}}</span>
+                            </div>
+                            <div>
+                                <button v-on:click="delet(index, 'del')"><img src="close.png" alt="del"></button>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="flex justify-center">
+                <ul class="px-8 py-8 border-b border-r border-l w-8/12">
+                    <li>
+                        <div class="flex justify-between">
+                            <h2 class="text-xl text-gray-400">
+                                <span>
+                                    {{Tasklist.length}}
+                                </span> tasks
+                            </h2>
+                            <h2 class="text-gray-400">
+                                <span v-on:click="All(index)" class="cursor-pointer text-blue-600 text-xl">All</span>
+                                <span class="cursor-pointer text-xl ml-4 hover:text-gray-700">Active</span>
+                                <span class="cursor-pointer text-xl ml-4">Completed</span>
+                            </h2>
+                            <h2 @click="Clear(index)" class="cursor-pointer text-xl text-gray-400 hover:text-gray-500">Clear Completed</h2>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <script src="https://unpkg.com/vue@next"></script>
+        <script src="vue.js"></script>
+    </div>
+</body>
+</html>
